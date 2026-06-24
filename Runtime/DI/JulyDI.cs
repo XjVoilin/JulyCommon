@@ -75,7 +75,7 @@ namespace JulyCommon
         {
             if (!_services.TryGetValue(type, out var existing)) return;
             JLogger.LogWarning(
-                $"{Frameworkconst.TagDependencyContainer} 服务 {type.Name} 已注册为 {existing.GetType().Name}，将被覆盖为 {newImplType?.Name}");
+                $"{FrameworkConst.TagDependencyContainer} 服务 {type.Name} 已注册为 {existing.GetType().Name}，将被覆盖为 {newImplType?.Name}");
         }
     }
 }

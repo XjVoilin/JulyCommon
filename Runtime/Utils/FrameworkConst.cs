@@ -3,7 +3,7 @@ namespace JulyCommon
     /// <summary>
     /// 框架相关的只读内容集中管理
     /// </summary>
-    public static class Frameworkconst
+    public static class FrameworkConst
     {
         public static readonly string FrameworkName = "JulyGF";
 
