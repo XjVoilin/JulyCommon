@@ -1,6 +1,6 @@
 {
   "name": "com.july.common",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "JulyCommon",
   "description": "July 框架 L0 基座：日志、Result、异常、Singleton 等中立工具 + 全局 DI 容器 JulyDI",
   "unity": "2021.3",
