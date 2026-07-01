@@ -51,13 +51,13 @@ namespace JulyCommon
         /// 创建失败结果
         /// </summary>
         public static FrameworkResult Failure(FrameworkErrorCode errorCode, string message = null)
-            => new(false, errorCode, message ?? GetDefaultMessage(errorCode), null);
+            => new(false, errorCode, message ?? errorCode.ToDefaultMessage(), null);
 
         /// <summary>
         /// 创建失败结果（带异常）
         /// </summary>
         public static FrameworkResult Failure(FrameworkErrorCode errorCode, Exception exception)
-            => new(false, errorCode, exception?.Message ?? GetDefaultMessage(errorCode), exception);
+            => new(false, errorCode, exception?.Message ?? errorCode.ToDefaultMessage(), exception);
 
         /// <summary>
         /// 从异常创建失败结果
@@ -96,37 +96,6 @@ namespace JulyCommon
             {
                 throw Exception ?? new JulyException(ErrorCode, Message);
             }
-        }
-
-        #endregion
-
-        #region 辅助方法
-
-        private static string GetDefaultMessage(FrameworkErrorCode errorCode)
-        {
-            return errorCode switch
-            {
-                FrameworkErrorCode.Success => "操作成功",
-                FrameworkErrorCode.Unknown => "未知错误",
-                FrameworkErrorCode.InvalidArgument => "参数无效",
-                FrameworkErrorCode.NullReference => "空引用",
-                FrameworkErrorCode.Timeout => "操作超时",
-                FrameworkErrorCode.Cancelled => "操作被取消",
-                FrameworkErrorCode.InvalidState => "状态无效",
-                FrameworkErrorCode.NotInitialized => "未初始化",
-                FrameworkErrorCode.AlreadyInitialized => "已初始化",
-                FrameworkErrorCode.NotSupported => "不支持的操作",
-                FrameworkErrorCode.ModuleNotFound => "模块未找到",
-                FrameworkErrorCode.ProviderNotFound => "Provider未找到",
-                FrameworkErrorCode.ResourceNotFound => "资源未找到",
-                FrameworkErrorCode.ResourceLoadFailed => "资源加载失败",
-                FrameworkErrorCode.NetworkConnectionFailed => "网络连接失败",
-                FrameworkErrorCode.UINotFound => "UI未找到",
-                FrameworkErrorCode.UIOpenFailed => "UI打开失败",
-                FrameworkErrorCode.SaveFailed => "数据保存失败",
-                FrameworkErrorCode.LoadFailed => "数据加载失败",
-                _ => $"错误码: {(int)errorCode}"
-            };
         }
 
         #endregion
@@ -196,7 +165,7 @@ namespace JulyCommon
         /// 创建失败结果
         /// </summary>
         public static FrameworkResult<T> Failure(FrameworkErrorCode errorCode, string message = null, Exception exception = null)
-            => new(false, default, errorCode, message ?? GetDefaultMessage(errorCode), exception);
+            => new(false, default, errorCode, message ?? errorCode.ToDefaultMessage(), exception);
 
         /// <summary>
         /// 从异常创建失败结果
@@ -262,20 +231,6 @@ namespace JulyCommon
         //         return FrameworkResult<TNew>.FromException(ex);
         //     }
         // }
-
-        #endregion
-
-        #region 辅助方法
-
-        private static string GetDefaultMessage(FrameworkErrorCode errorCode)
-        {
-            return errorCode switch
-            {
-                FrameworkErrorCode.Success => "操作成功",
-                FrameworkErrorCode.Unknown => "未知错误",
-                _ => $"错误码: {(int)errorCode}"
-            };
-        }
 
         #endregion
 
